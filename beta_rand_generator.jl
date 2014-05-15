@@ -2,6 +2,7 @@ function beta_generator(a::Float64, b::Float64, n::Int)
 
   vector = zeros(n)
   count = 1
+  
   # when a and b are less than 1
   if a < 1.0 && b < 1.0
     while count <= n
@@ -12,11 +13,12 @@ function beta_generator(a::Float64, b::Float64, n::Int)
         count += 1
       end
     end
-
+  # when a and b are integers
   elseif  a == ceil(a) && b == ceil(b)
     for count = 1:n
       vector[count] = sort(rand(convert(Int, a + b + 1)))[a]
     end
+  # other cases
   else
     vector = (rand(Gamma(1.0, a), n) ./(rand(Gamma(1.0, a), n)
               + rand(Gamma(1.0, b), n)))
